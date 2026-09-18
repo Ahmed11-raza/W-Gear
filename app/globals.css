@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   I-WEAR — DESIGN TOKENS
+   Three layers: primitive -> semantic -> component.
+   Concept: ONE CLOTH. MANY MOVEMENTS.  Device: THE CUT LINE.
+   The interface stays mineral; the garments carry the colour.
+   ========================================================================== */
+
+@theme {
+  /* ---- PRIMITIVE: mineral ground ------------------------------------- */
+  --color-chalk: #f9f8f6;
+  --color-limestone: #f0ede6;
+  --color-sandstone: #e7e3da;
+  --color-stone: #e2ddd5;
+  --color-ash: #cfc9be;
+
+  /* ---- PRIMITIVE: ink ------------------------------------------------- */
+  --color-obsidian: #1c1917;
+  --color-graphite: #3a3531;
+  --color-slate: #5c564e;
+
+  /* ---- PRIMITIVE: pigment --------------------------------------------- */
+  --color-cypress: #2c3e35;
+  --color-clay: #b85d3b;
+  /* Darkened sibling. #b85d3b measures 4.24:1 on chalk — large text only.
+     #a65435 measures 5.02:1 on chalk / 4.56:1 on limestone — safe for body. */
+  --color-clay-text: #a65435;
+
+  /* ---- SEMANTIC -------------------------------------------------------- */
+  --color-canvas: var(--color-chalk);
+  --color-surface: var(--color-limestone);
+  --color-elevated: var(--color-sandstone);
+  --color-line: var(--color-stone);
+  --color-line-strong: var(--color-ash);
+
+  --color-ink: var(--color-obsidian);
+  --color-ink-soft: var(--color-graphite);
+  --color-muted: var(--color-slate);
+  --color-inverse: var(--color-chalk);
+
+  --color-accent: var(--color-clay);
+  --color-accent-text: var(--color-clay-text);
+  --color-deep: var(--color-cypress);
+
+  --color-danger: #9b2c1f;
+  --color-success: #2c5940;
+
+  /* ---- TYPEFACES ------------------------------------------------------- */
+  --font-display: var(--font-cabinet), "Arial Narrow", system-ui, sans-serif;
+  --font-ui: var(--font-satoshi), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  /* ---- TYPE SCALE: aggressive jumps, not a gentle ramp ------------------ */
+  --text-hero: clamp(3.25rem, 11vw, 11rem);
+  --text-hero--line-height: 0.88;
+  --text-hero--letter-spacing: -0.045em;
+
+  --text-display: clamp(2.5rem, 7vw, 6rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-title: clamp(1.75rem, 3.2vw, 2.75rem);
+  --text-title--line-height: 1.02;
+  --text-title--letter-spacing: -0.02em;
+
+  --text-lede: clamp(1.125rem, 1.6vw, 1.375rem);
+  --text-lede--line-height: 1.45;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  /* Technical: spec data only — GSM, measurements, player numbers */
+  --text-spec: 0.6875rem;
+  --text-spec--line-height: 1.2;
+  --text-spec--letter-spacing: 0.14em;
+
+  /* ---- SPATIAL RHYTHM: macro sections breathe, micro UI stays tight ----- */
+  --spacing-section: clamp(5rem, 11vw, 11rem);
+  --spacing-gutter: clamp(1.25rem, 4vw, 4.5rem);
+
+  /* ---- RADIUS: editorial edges by default ------------------------------ */
+  --radius-none: 0px;
+  --radius-control: 2px;
+  --radius-pill: 999px;
+
+  /* ---- ELEVATION: near-invisible. No floating-card shadows. ------------- */
+  --shadow-subtle: 0 1px 2px rgb(28 25 23 / 0.04);
+  --shadow-lift: 0 12px 32px -12px rgb(28 25 23 / 0.16);
+
+  /* ---- MOTION: four levels (brief 32) ---------------------------------- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-firm: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-l1: 180ms;
+  --duration-l2: 320ms;
+  --duration-l3: 620ms;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* no horizontal overflow, ever (brief 37) */
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0; }
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Focus: visible and unmistakable, never removed (brief 39) */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+/* ==========================================================================
+   REDUCED MOTION — final state, instantly. Nothing hidden, nothing lost.
+   GSAP timelines are gated separately via gsap.matchMedia().
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+/* Technical data voice — GSM, measurements, player numbers. Never decorative. */
+@utility text-spec {
+  font-family: var(--font-mono);
+  font-size: var(--text-spec);
+  line-height: var(--text-spec--line-height);
+  letter-spacing: var(--text-spec--letter-spacing);
+  text-transform: uppercase;
+}
+
+/* Page gutter — one definition, so nothing ever touches the screen edge. */
+@utility gutter {
+  padding-inline: var(--spacing-gutter);
+}
