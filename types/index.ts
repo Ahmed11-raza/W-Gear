@@ -96,3 +96,102 @@ export interface TeamwearConfiguration {
     organisation: string;
   };
 }
+
+/* ==========================================================================
+   STOREFRONT MODEL
+   The UI reads these shapes only. `data/products.ts` is a mock adapter and can
+   be replaced by a CMS or commerce backend without any component changing.
+   ========================================================================== */
+
+/** Minor units (paisa) are not used — PKR is quoted in whole rupees. */
+export type Price = number;
+
+export type ProductLine = "everyday" | "training" | "field";
+
+export type FitProfile = "regular" | "athletic" | "relaxed";
+
+/** A garment silhouette the procedural renderer knows how to draw. */
+export type Silhouette =
+  | "tee"
+  | "polo"
+  | "longsleeve"
+  | "tank"
+  | "shorts"
+  | "joggers"
+  | "jacket"
+  | "hoodie"
+  | "jersey";
+
+/** One measurable claim about the cloth. Rendered in the technical voice. */
+export interface Specification {
+  label: string;
+  value: string;
+}
+
+export interface ProductColorway {
+  id: string;
+  name: string;
+  /** Primary body colour. */
+  hex: string;
+  /** Secondary — trim, panel, collar. */
+  accentHex: string;
+}
+
+export interface ProductVariant {
+  size: SizeCode;
+  /** Demo stock figure. Drives the disabled state on the size selector. */
+  stock: number;
+}
+
+export interface Product {
+  slug: string;
+  name: string;
+  line: ProductLine;
+  silhouette: Silhouette;
+  price: Price;
+  currency: Currency;
+  /** One line under the name in the grid. */
+  summary: string;
+  /** Two or three paragraphs on the product page. */
+  description: string[];
+  fit: FitProfile;
+  specifications: Specification[];
+  features: string[];
+  colorways: ProductColorway[];
+  variants: ProductVariant[];
+  /** Collection slugs this product belongs to. */
+  collections: string[];
+  /** Surfaces it on the shop landing rail. */
+  featured?: boolean;
+}
+
+export interface Collection {
+  slug: string;
+  name: string;
+  /** Sits under the collection title. */
+  tagline: string;
+  description: string;
+  /** Display accent, drawn from the palette. */
+  accentHex: string;
+}
+
+export interface Story {
+  slug: string;
+  title: string;
+  /** ISO 8601. Drives ordering and `<time dateTime>`. */
+  date: string;
+  category: string;
+  /** Standfirst — the paragraph under the headline. */
+  standfirst: string;
+  readingMinutes: number;
+  /** Body as markdown-lite: `## ` opens a section, blank line splits blocks. */
+  body: string[];
+}
+
+/** One line of a cart. Colour and size together identify what was chosen. */
+export interface CartLine {
+  productSlug: string;
+  colorwayId: string;
+  size: SizeCode;
+  quantity: number;
+}

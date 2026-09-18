@@ -80,7 +80,9 @@ export function Hero({ image }: { image: ReactNode }) {
         }}
       />
 
-      <div className="gutter relative pb-[clamp(2.5rem,6vw,5rem)] pt-[clamp(6rem,14vw,10rem)]">
+      {/* Bottom padding clears the demo notice — a fixed bar over the foot of
+          the viewport that would otherwise cover these CTAs (brief 37). */}
+      <div className="gutter relative pb-[calc(clamp(2.5rem,6vw,5rem)+var(--demo-bar))] pt-[clamp(6rem,14vw,10rem)]">
         <p data-hero-meta className="text-spec mb-[clamp(1.5rem,3vw,2.5rem)] text-canvas/70">
           Everyday sportswear &nbsp;/&nbsp; Custom teamwear
         </p>

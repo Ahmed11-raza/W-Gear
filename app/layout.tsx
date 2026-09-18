@@ -3,6 +3,7 @@ import { fontClassNames } from "@/lib/fonts";
 import { BRAND } from "@/lib/brand";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { DemoNotice } from "@/components/layout/DemoNotice";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <DemoNotice />
       </body>
     </html>
   );

@@ -1,0 +1,6 @@
+# pnpm 11 reads build-script approvals from here, not from package.json.
+# unrs-resolver is a native module pulled in by eslint-config-next and needs its
+# postinstall to fetch a binding. Without this approval pnpm treats the skipped
+# script as a hard error (ERR_PNPM_IGNORED_BUILDS) and CI installs fail.
+onlyBuiltDependencies:
+  - unrs-resolver

@@ -1,8 +1,23 @@
 import type { Metadata } from "next";
-import { NotBuilt } from "@/components/layout/NotBuilt";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { ProductGrid } from "@/components/shop/ProductGrid";
+import { PRODUCTS } from "@/data/products";
 
-export const metadata: Metadata = { title: "Shop" };
+export const metadata: Metadata = {
+  title: "Shop",
+  description:
+    "Everyday performance wear and match-weight kit, cut and finished to one standard.",
+};
 
 export default function Page() {
-  return <NotBuilt title="Shop" note="The storefront — collection grid, product pages, cart and checkout — is designed in the data model but not built in this pass. This build covers the design foundation and the three moments that carry the brand: the hero, the split between everyday and teamwear, and the team builder." />;
+  return (
+    <>
+      <PageHeader
+        kicker="Everything"
+        title="One cloth. Many movements."
+        lede="Twelve pieces across three lines. Everyday wear that performs, training pieces built around heat and range, and match kit you can order one at a time or by the side."
+      />
+      <ProductGrid products={PRODUCTS} />
+    </>
+  );
 }

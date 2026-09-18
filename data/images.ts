@@ -49,6 +49,14 @@ export const IMAGE_SLOTS = {
     alt: "A team in matching kit, photographed together",
     ratio: 3 / 4,
   },
+  "movement-editorial": {
+    id: "movement-editorial",
+    path: "images/editorial/movement.jpg",
+    brief:
+      "The lifestyle counterpart to the fabric macro it sits beside. One athlete in motion, shot wide enough that the environment is legible — Islamabad street, Margalla trail, court or concrete. Pakistan embedded in the frame as place, not decoration: no flags, no truck art, no national symbolism. Vertical crop must survive, since the mobile composition stacks this above the texture. Leave the upper third calm; display type crosses it.",
+    alt: "An athlete moving through a city environment",
+    ratio: 4 / 5,
+  },
   "fabric-macro": {
     id: "fabric-macro",
     path: "images/fabric/macro.jpg",

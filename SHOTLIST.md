@@ -119,3 +119,26 @@ cannot touch the cloth judges it here.
 Anyone recognisable in these images needs a signed model release before the site
 goes live, since this is commercial use. That is why no stock photography of
 identifiable athletes was used to fill these slots in the meantime.
+
+---
+
+## 5. `movement-editorial` — the lifestyle counterpart
+
+**Path:** `public/images/editorial/movement.jpg`
+**Ratio:** 4:5 (portrait)
+
+Sits directly beside a macro fabric frame on the homepage, in the section that
+carries the site's signature device (brief 30). The two halves scroll at
+different speeds, so this frame reads as the human world moving past a fixed
+material.
+
+One athlete in motion, framed wide enough that the environment is legible —
+Islamabad street, Margalla trail, court, or concrete architecture. Pakistan
+embedded as place, not decoration: no flags, no truck art, no national
+symbolism.
+
+**Composition:** the mobile layout stacks this above the texture, so the
+vertical crop has to survive. Keep the upper third calm — display type crosses
+it, over a dark scrim.
+
+**Alt text on the site:** "An athlete moving through a city environment"

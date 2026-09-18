@@ -29,6 +29,12 @@ const COLUMNS = [
   },
 ] as const;
 
+const SOCIAL = [
+  { key: "instagram", label: "Instagram" },
+  { key: "tiktok", label: "TikTok" },
+  { key: "youtube", label: "YouTube" },
+] as const;
+
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -42,6 +48,23 @@ export function Footer() {
             </p>
             <p className="mt-4 max-w-[34ch] text-muted">{BRAND.description}</p>
             <p className="text-spec mt-6 text-muted">{BRAND.contact.city}</p>
+
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+              {SOCIAL.filter(({ key }) => isConfigured(BRAND.social[key])).map(
+                ({ key, label }) => (
+                  <li key={key}>
+                    <a
+                      href={BRAND.social[key]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-spec text-ink transition-colors duration-[180ms] hover:text-accent-text"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ),
+              )}
+            </ul>
           </div>
 
           {COLUMNS.map((col) => (
@@ -74,6 +97,11 @@ export function Footer() {
               : "Contact details to be confirmed"}
           </p>
         </div>
+
+        <p className="text-spec mt-6 max-w-[70ch] text-muted">
+          Demonstration build — products, prices, stock, policies and contact
+          details are sample data and describe no real business.
+        </p>
       </div>
     </footer>
   );

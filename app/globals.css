@@ -187,3 +187,85 @@ img, svg, video {
 @utility gutter {
   padding-inline: var(--spacing-gutter);
 }
+
+/* ==========================================================================
+   CONTAINERS (brief 36)
+   Declared as --container-* so Tailwind generates the matching max-w-*
+   utilities. Editorial is the wide default; reading is measured in ch so the
+   line length stays right regardless of type scale.
+   ========================================================================== */
+
+@theme {
+  --container-editorial: 96rem;
+  --container-feature: 72rem;
+  --container-reading: 68ch;
+}
+
+/* Centres a wide editorial column inside the page gutter. */
+@utility shell {
+  width: 100%;
+  max-width: var(--container-editorial);
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   FORM CONTROLS (brief 36)
+   One definition, so an input on the checkout matches an input in the team
+   builder without either restating the same six declarations.
+   ========================================================================== */
+
+@utility field {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding-inline: 0.75rem;
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-control);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  transition: border-color var(--duration-l1) var(--ease-out-soft);
+
+  &:focus {
+    border-color: var(--color-ink);
+  }
+
+  &[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* The label above a field. Same voice as a spec label — this is data entry. */
+@utility field-label {
+  display: block;
+  margin-block-end: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-spec);
+  line-height: var(--text-spec--line-height);
+  letter-spacing: var(--text-spec--letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ==========================================================================
+   DEMO BAR CLEARANCE
+   The demonstration notice is a fixed bottom bar. It publishes its own height
+   here at runtime so that full-height sections anchoring content to the bottom
+   of the viewport can clear it, rather than having their calls to action sit
+   underneath it (brief 37).
+   Zero whenever the notice is absent or dismissed, so the calc costs nothing.
+   ========================================================================== */
+
+:root {
+  --demo-bar: 0px;
+}
+
+body {
+  padding-block-end: var(--demo-bar);
+}

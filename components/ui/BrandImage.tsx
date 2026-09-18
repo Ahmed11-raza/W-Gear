@@ -9,6 +9,12 @@ interface BrandImageProps {
   className?: string;
   /** Show the full shot brief in the placeholder. Off for small slots. */
   showBrief?: boolean;
+  /**
+   * Push the placeholder's label clear of the fixed header. Set it on any slot
+   * that runs full-bleed to the top of the viewport, or the label renders
+   * underneath the wordmark and both become unreadable.
+   */
+  underHeader?: boolean;
 }
 
 /**
@@ -21,7 +27,13 @@ interface BrandImageProps {
  *
  * Both branches occupy identical space, so filling a slot causes no reflow.
  */
-export function BrandImage({ slot, sizes, className, showBrief = true }: BrandImageProps) {
+export function BrandImage({
+  slot,
+  sizes,
+  className,
+  showBrief = true,
+  underHeader = false,
+}: BrandImageProps) {
   if (slot.supplied) {
     return (
       <div className={cn("relative overflow-hidden", className)} style={{ aspectRatio: slot.ratio }}>
@@ -57,7 +69,7 @@ export function BrandImage({ slot, sizes, className, showBrief = true }: BrandIm
         <rect width="100%" height="100%" fill={`url(#hatch-${slot.id})`} opacity="0.55" />
       </svg>
 
-      <div className="relative gutter pt-5">
+      <div className={cn("relative gutter", underHeader ? "pt-[84px] md:pt-[92px]" : "pt-5")}>
         <p className="text-spec text-ink">Placeholder</p>
         <p className="text-spec mt-1 text-muted">
           {slot.id} &middot; {slot.ratio.toFixed(2)}:1
