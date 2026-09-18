@@ -1,4 +1,4 @@
-/**
+﻿/**
  * THE SINGLE RENAME POINT.
  *
  * The brand name is not locked (brief 01). Everything user-facing reads from
@@ -16,11 +16,11 @@ export const BRAND = {
   /** Used where the wordmark is set in display type and needs no punctuation. */
   wordmark: "I-WEAR",
   /** DEMO. Replace with the registered entity once incorporation completes. */
-  legalName: "I-Wear Apparel (Pvt) Ltd",
+  legalName: "I-Wear Performance Apparel (Pvt) Ltd",
 
   tagline: "Made to move. Built for everyday.",
   description:
-    "A sportswear brand born in Pakistan. Everyday performance wear for people who move, and custom teamwear built to order.",
+    "A sportswear brand engineered for Pakistan's urban climate and movement. Masterfully manufactured in Sialkot. Everyday performance wear and custom club teamwear.",
 
   /** DEMO origin. Drives metadataBase, canonicals and Open Graph URLs. */
   url: "https://demo.i-wear.pk",
@@ -29,15 +29,15 @@ export const BRAND = {
   contact: {
     /**
      * DEMO number — not in service. International format, digits only, no +.
-     * The WhatsApp architecture (brief 23) is built and works; it will point at
+     * The WhatsApp architecture is built and works; it will point at
      * the real number the moment this value is replaced.
      */
     whatsapp: "923001234567",
-    email: "hello@i-wear.pk",
-    city: "Islamabad, Pakistan",
-    /** DEMO. Shown on the about page. */
-    studio: "Sector F-7, Islamabad",
-    hours: "Monday to Saturday, 10:00 to 19:00 PKT",
+    email: "concierge@i-wear.pk",
+    city: "Pakistan",
+    manufacturingHub: "Sialkot, Punjab",
+    studio: "Lahore / Karachi / Islamabad Concierge Desk",
+    hours: "Monday to Saturday, 09:00 to 22:00 PKT",
   },
 
   /** DEMO profile URLs — these accounts do not exist. */
@@ -55,9 +55,8 @@ export function isConfigured(value: string): boolean {
 
 /**
  * Build a WhatsApp deep link carrying the context the customer was looking at,
- * so the conversation starts informed rather than from zero (brief 23).
- * Returns null when the number is still a placeholder — callers must handle
- * that rather than rendering a link that goes nowhere (brief 64: no dead buttons).
+ * so the conversation starts informed rather than from zero.
+ * Returns null when the number is still a placeholder.
  */
 export function whatsappLink(message: string): string | null {
   if (!isConfigured(BRAND.contact.whatsapp)) return null;

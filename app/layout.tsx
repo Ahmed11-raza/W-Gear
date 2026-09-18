@@ -1,9 +1,10 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { fontClassNames } from "@/lib/fonts";
 import { BRAND } from "@/lib/brand";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { DemoNotice } from "@/components/layout/DemoNotice";
+import { WhatsAppDesk } from "@/components/layout/WhatsAppDesk";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <DemoNotice />
+        <WhatsAppDesk />
       </body>
     </html>
   );

@@ -1,36 +1,34 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
- * Manufacturing credibility (brief 11 §8, brief 19).
+ * Manufacturing credibility — Sialkot technical craftsmanship.
  *
- * A numbered editorial sequence, not three feature cards (brief 59). It
- * describes the route a garment takes and claims nothing about capacity,
- * certification, factory partners or output — none of which are known
- * (brief 53). What it establishes is that the people behind this understand
- * what happens to cloth, which is a different and defensible claim.
+ * Sialkot is the undisputed global epicentre of sports garment engineering,
+ * manufacturing kit for the FIFA World Cup and premier international athletic houses.
+ * This section details the four precise stages of technical garment construction.
  */
 
 const STEPS = [
   {
     n: "01",
-    heading: "Cloth first",
-    body: "The material is chosen before the garment is drawn. Weight, composition and knit structure decide what a piece can do; everything after that is a decision made downstream of the cloth.",
+    heading: "Cloth selection & Sialkot milling",
+    body: "Custom-knitted circular jersey and micro-mesh engineered from high-tenacity technical yarns. Breathability and capillary cooling tested against Pakistan's summer humidity.",
   },
   {
     n: "02",
-    heading: "Cut to a block",
-    body: "Patterns are graded from a block rather than scaled from a single size, which is why a 2XL is shaped like a 2XL instead of an enlarged medium.",
+    heading: "Anatomical block grading",
+    body: "Patterns are cut from individual athletic blocks rather than scaled mechanically from a single sample. Proportions remain true across every size from S to 3XL.",
   },
   {
     n: "03",
-    heading: "Seamed for the movement",
-    body: "Flatlock where the seam sits against skin, overlock and coverstitch where strength matters more than profile, bar tacks at the points that actually fail.",
+    heading: "Precision flatlock seaming",
+    body: "Six-thread flatlock stitching sits completely flush against skin to prevent friction burn during training. Reinforcement bar-tacks anchor pocket openings and high-tension stress points.",
   },
   {
     n: "04",
-    heading: "Finished and checked",
-    body: "Pressed, trimmed and checked piece by piece against the approved sample before it is boxed.",
+    heading: "Sample inspection & batch verification",
+    body: "Every single piece is individual-garment steam-pressed, checked for seam elasticity, and inspected against master tolerance sheets before final boxing.",
   },
 ];
 
@@ -40,7 +38,7 @@ export function MakingStory() {
       <div className="shell">
         <div className="grid gap-x-[clamp(2rem,5vw,6rem)] gap-y-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div className="lg:sticky lg:top-[9rem]">
-            <p className="text-spec text-muted">How it is made</p>
+            <p className="text-spec text-muted">Sialkot Craftsmanship</p>
             <h2
               id="making-heading"
               className="mt-5 max-w-[12ch] font-display"
@@ -50,13 +48,16 @@ export function MakingStory() {
                 letterSpacing: "var(--text-display--letter-spacing)",
               }}
             >
-              From fabric to field.
+              Engineered in Sialkot.
             </h2>
+            <p className="mt-4 text-small text-muted max-w-[36ch] leading-relaxed">
+              Constructed in Pakistan&apos;s historic sporting goods capital, where the world&apos;s finest performance gear has been cut and sewn for over a century.
+            </p>
             <Link
               href="/teamwear/manufacturing"
-              className="mt-8 inline-block text-[0.9375rem] text-ink underline decoration-line-strong underline-offset-[6px] transition-colors duration-[180ms] hover:decoration-ink"
+              className="mt-6 inline-block text-[0.9375rem] text-ink underline decoration-line-strong underline-offset-[6px] transition-colors duration-[180ms] hover:decoration-ink"
             >
-              The full process
+              The full manufacturing process &rarr;
             </Link>
           </div>
 

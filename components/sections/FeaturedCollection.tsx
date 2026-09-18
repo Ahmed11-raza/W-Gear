@@ -1,21 +1,10 @@
-import Link from "next/link";
+﻿import Link from "next/link";
+import Image from "next/image";
 import type { Product } from "@/types";
 import { GarmentRender } from "@/components/ui/GarmentRender";
 import { Reveal } from "@/components/motion/Reveal";
 import { formatPrice } from "@/lib/brand";
 
-/**
- * Featured collection (brief 11 §4, brief 12).
- *
- * Deliberately not the shop grid. Three pieces at three different scales in an
- * asymmetric composition — the lead piece takes the tall column and the other
- * two stack beside it, so the section reads as an edit someone made rather than
- * as the first row of a catalogue (brief 31: vary image sizes, avoid card-grid
- * monotony).
- *
- * Server-rendered. Nothing here needs state, so nothing here ships JavaScript
- * (brief 38).
- */
 export function FeaturedCollection({ products }: { products: Product[] }) {
   const [lead, ...rest] = products.slice(0, 3);
   if (!lead) return null;
@@ -25,7 +14,7 @@ export function FeaturedCollection({ products }: { products: Product[] }) {
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-spec text-muted">Selected</p>
+            <p className="text-spec text-muted uppercase tracking-wider">Curated Edit</p>
             <h2
               id="featured-heading"
               className="mt-5 max-w-[16ch] font-display"
@@ -41,9 +30,9 @@ export function FeaturedCollection({ products }: { products: Product[] }) {
 
           <Link
             href="/shop"
-            className="text-[0.9375rem] text-ink underline decoration-line-strong underline-offset-[6px] transition-colors duration-[180ms] hover:decoration-ink"
+            className="text-[0.9375rem] text-ink underline decoration-line-strong underline-offset-[6px] transition-colors duration-[180ms] hover:decoration-ink font-semibold"
           >
-            All sportswear
+            Explore all pieces &rarr;
           </Link>
         </div>
 
@@ -73,6 +62,14 @@ function FeaturedPiece({
   const colorway = product.colorways[0];
   const isLead = scale === "lead";
 
+  const photoMap: Record<string, string> = {
+    "meridian-training-tee": "/images/products/meridian-tee.jpg",
+    "baseline-performance-polo": "/images/products/baseline-polo.jpg",
+    "ridge-training-short": "/images/products/ridge-short.jpg",
+  };
+
+  const photo = photoMap[product.slug];
+
   return (
     <article className="group relative flex flex-col">
       <div
@@ -81,19 +78,29 @@ function FeaturedPiece({
       >
         <div
           className={
-            "absolute inset-0 flex items-center justify-center transition-transform duration-[620ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] " +
-            (isLead ? "p-[10%]" : "p-[5%]")
+            "absolute inset-0 flex items-center justify-center transition-transform duration-[620ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
           }
         >
-          <GarmentRender
-            silhouette={product.silhouette}
-            hex={colorway.hex}
-            accentHex={colorway.accentHex}
-            uid={`featured-${product.slug}`}
-          />
+          {photo ? (
+            <Image
+              src={photo}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <GarmentRender
+              silhouette={product.silhouette}
+              hex={colorway.hex}
+              accentHex={colorway.accentHex}
+              uid={`featured-${product.slug}`}
+            />
+          )}
         </div>
 
-        <p className="text-spec absolute top-5 left-5 text-muted">{product.line}</p>
+        <p className="text-spec absolute top-5 left-5 bg-canvas/85 backdrop-blur-xs px-2 py-0.5 text-muted uppercase font-bold tracking-wider z-10">
+          {product.line}
+        </p>
       </div>
 
       <div className="mt-6 flex items-baseline justify-between gap-6">
@@ -110,10 +117,10 @@ function FeaturedPiece({
             {product.name}
           </Link>
         </h3>
-        <p className="text-spec shrink-0 text-ink">{formatPrice(product.price)}</p>
+        <p className="text-spec shrink-0 text-ink font-bold">{formatPrice(product.price)}</p>
       </div>
 
-      <p className="mt-3 max-w-[44ch] text-muted">{product.summary}</p>
+      <p className="mt-3 max-w-[44ch] text-muted text-sm leading-relaxed">{product.summary}</p>
     </article>
   );
 }
