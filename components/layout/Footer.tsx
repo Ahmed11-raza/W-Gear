@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BRAND, isConfigured } from "@/lib/brand";
+import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 
 const COLUMNS = [
   {
@@ -40,6 +41,10 @@ export function Footer() {
 
   return (
     <footer className="border-t border-line bg-surface">
+      <div className="gutter border-b border-line py-[clamp(2.5rem,5vw,4rem)]">
+        <NewsletterSignup source="footer" />
+      </div>
+
       <div className="gutter py-[clamp(3rem,7vw,6rem)]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>

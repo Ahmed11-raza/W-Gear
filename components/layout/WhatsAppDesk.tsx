@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MessageCircle, X, Send, ShieldCheck, Sparkles } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { trackWhatsApp } from "@/lib/track";
 
 export function WhatsAppDesk() {
   const [open, setOpen] = useState(false);
@@ -20,13 +21,15 @@ export function WhatsAppDesk() {
     e.preventDefault();
     const text = query.trim() || `Inquiry regarding ${topic} at ${BRAND.name}`;
     const encoded = encodeURIComponent(`Hi ${BRAND.name} Team, [${topic}]: ${text}`);
+    trackWhatsApp(topic);
     window.open(`https://wa.me/${BRAND.contact.whatsapp}?text=${encoded}`, "_blank");
     setOpen(false);
     setQuery("");
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    // Lifted clear of the demo notice, which is a fixed bar on the same edge.
+    <div className="fixed right-5 z-50 bottom-[calc(1.25rem+var(--demo-bar,0px))]">
       {open ? (
         <div className="w-[320px] sm:w-[360px] bg-white border border-line p-5 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
           <div className="flex items-center justify-between pb-3 border-b border-line">

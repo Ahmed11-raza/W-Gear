@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { BrandImage } from "@/components/ui/BrandImage";
 import { resolveSlot } from "@/lib/images";
 import { GARMENTS, SPORTS } from "@/data/teamwear";
+import { QuoteRequest } from "@/components/teamwear/QuoteRequest";
 
 export const metadata: Metadata = {
   title: "Custom teamwear",
@@ -137,9 +138,20 @@ export default function Page() {
         >
           Start with your sport.
         </h2>
+        <p className="mt-6 max-w-[54ch] text-[0.9375rem] leading-[1.6] text-muted">
+          Configure the kit yourself and see it as you go — or, if you just need a number to take
+          to a committee, ask for a quote instead.
+        </p>
         <ButtonLink href="/teamwear/build" size="lg" className="mt-10">
           Build your team
         </ButtonLink>
+      </section>
+
+      {/* The lower-commitment path. Most enquiries are not ready to configure. */}
+      <section aria-labelledby="quote-heading" className="gutter pb-[clamp(4rem,9vw,8rem)]">
+        <div className="max-w-[54rem]">
+          <QuoteRequest />
+        </div>
       </section>
     </>
   );

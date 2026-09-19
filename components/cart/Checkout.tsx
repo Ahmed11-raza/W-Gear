@@ -5,6 +5,7 @@ import { clearCart, useCart } from "./useCart";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { getProduct } from "@/data/products";
 import { BRAND, formatPrice, whatsappLink } from "@/lib/brand";
+import { trackPurchase } from "@/lib/track";
 import { cn } from "@/lib/cn";
 import { ShieldCheck, Truck, Banknote, QrCode, CreditCard, CheckCircle2, MessageCircle } from "lucide-react";
 
@@ -91,6 +92,24 @@ export function Checkout() {
     if (!validate()) return;
 
     const orderRef = `IW-${Date.now().toString(36).toUpperCase()}`;
+    trackPurchase(
+      lines.flatMap((line) => {
+        const item = getProduct(line.productSlug);
+        return item
+          ? [{
+              slug: item.slug,
+              name: item.name,
+              price: item.price,
+              size: line.size,
+              quantity: line.quantity,
+            }]
+          : [];
+      }),
+      grandTotal,
+      orderRef,
+      details.paymentMethod,
+    );
+
     setPlaced({
       id: orderRef,
       details,

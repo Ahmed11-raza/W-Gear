@@ -7,6 +7,7 @@ import type { Product, SizeCode } from "@/types";
 import { GarmentRender } from "@/components/ui/GarmentRender";
 import { Button } from "@/components/ui/Button";
 import { addLine } from "@/components/cart/useCart";
+import { trackAddToCart } from "@/lib/track";
 import { BRAND, formatPrice, whatsappLink } from "@/lib/brand";
 import { cn } from "@/lib/cn";
 import { ShieldCheck, Truck, Ruler, CheckCircle2 } from "lucide-react";
@@ -40,6 +41,14 @@ export function ProductPurchase({ product }: { product: Product }) {
   function handleAdd() {
     if (!size) return;
     addLine({ productSlug: product.slug, colorwayId: colorway.id, size, quantity });
+    trackAddToCart({
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      colorway: colorway.name,
+      size,
+      quantity,
+    });
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2600);
   }

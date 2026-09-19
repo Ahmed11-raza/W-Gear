@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { DemoNotice } from "@/components/layout/DemoNotice";
 import { WhatsAppDesk } from "@/components/layout/WhatsAppDesk";
+import { Analytics } from "@/components/analytics/Analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <DemoNotice />
         <WhatsAppDesk />
+        <Analytics />
       </body>
     </html>
   );
