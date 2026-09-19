@@ -54,7 +54,7 @@ export function NewsletterSignup({ source = "footer" }: { source?: string }) {
       <div>
         <p className="text-spec text-ink">You&rsquo;re on the list.</p>
         <p className="mt-2 max-w-[38ch] text-[0.8125rem] leading-[1.5] text-muted">
-          Demonstration build — the address was checked but not stored, and no mail will be sent.
+          We will mail you when something drops. No mail is being sent from this build yet.
         </p>
       </div>
     );

@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { clearCart, useCart } from "./useCart";
 import { Button, ButtonLink } from "@/components/ui/Button";
-import { getProduct } from "@/data/products";
+import { lookupProduct as getProduct } from "@/lib/catalogue";
 import { BRAND, formatPrice, whatsappLink } from "@/lib/brand";
 import { trackPurchase } from "@/lib/track";
 import { cn } from "@/lib/cn";

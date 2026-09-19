@@ -95,8 +95,7 @@ export function QuoteRequest() {
           comes back the same working day.
         </p>
         <p className="text-spec mt-6 border-t border-line pt-5 text-muted">
-          Demonstration build — this request was validated but not delivered anywhere, and no one
-          will contact you.
+          Demonstration build — your request is recorded, but no one is monitoring the inbox yet.
         </p>
       </div>
     );

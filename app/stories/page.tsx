@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/motion/Reveal";
-import { storiesByDate, formatStoryDate } from "@/data/stories";
+import { formatStoryDate } from "@/data/stories";
+import { getStories } from "@/lib/store";
 
 export const metadata: Metadata = {
   title: "Stories",
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
     "Training in Pakistan, how fabric actually works, and what separates kit that lasts from kit that does not.",
 };
 
-export default function Page() {
-  const stories = storiesByDate();
+export default async function Page() {
+  const stories = await getStories();
 
   return (
     <>

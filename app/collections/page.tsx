@@ -3,15 +3,19 @@ import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/motion/Reveal";
 import { GarmentRender } from "@/components/ui/GarmentRender";
-import { COLLECTIONS } from "@/data/collections";
-import { productsInCollection } from "@/data/products";
+import { getCollections, getProducts } from "@/lib/store";
 
 export const metadata: Metadata = {
   title: "Collections",
   description: "Four ways into the range, grouped by what the pieces are for.",
 };
 
-export default function Page() {
+export default async function Page() {
+  // Fetched once and filtered in memory — a query per collection inside the
+  // map would be four round trips for data already in hand.
+  const collections = await getCollections();
+  const products = await getProducts();
+
   return (
     <>
       <PageHeader
@@ -22,9 +26,11 @@ export default function Page() {
 
       <div className="gutter pb-[clamp(4rem,9vw,8rem)]">
         <Reveal stagger className="grid gap-x-8 gap-y-16 md:grid-cols-2">
-          {COLLECTIONS.map((collection) => {
-            const products = productsInCollection(collection.slug);
-            const lead = products[0];
+          {collections.map((collection) => {
+            const inCollection = products.filter((p) =>
+              p.collections.includes(collection.slug),
+            );
+            const lead = inCollection[0];
 
             return (
               <article key={collection.slug} className="group relative flex flex-col">
@@ -55,7 +61,7 @@ export default function Page() {
                     {collection.name}
                   </h2>
                   <p className="text-spec shrink-0 text-muted">
-                    {products.length} {products.length === 1 ? "piece" : "pieces"}
+                    {inCollection.length} {inCollection.length === 1 ? "piece" : "pieces"}
                   </p>
                 </div>
 

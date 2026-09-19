@@ -6,6 +6,9 @@ import { Footer } from "@/components/layout/Footer";
 import { DemoNotice } from "@/components/layout/DemoNotice";
 import { WhatsAppDesk } from "@/components/layout/WhatsAppDesk";
 import { Analytics } from "@/components/analytics/Analytics";
+import { ChromeGate } from "@/components/layout/ChromeGate";
+import { CatalogueSync } from "@/components/catalogue/CatalogueSync";
+import { getProducts } from "@/lib/store";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,7 +37,11 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // The cart runs in the browser and cannot query the database, so the
+  // published catalogue is handed to it here.
+  const products = await getProducts();
+
   return (
     <html lang="en" className={fontClassNames}>
       <body>
@@ -44,11 +51,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Header />
+        <CatalogueSync products={products} />
+        <ChromeGate>
+          <Header />
+        </ChromeGate>
         <main id="main">{children}</main>
-        <Footer />
-        <DemoNotice />
-        <WhatsAppDesk />
+        <ChromeGate>
+          <Footer />
+          <DemoNotice />
+          <WhatsAppDesk />
+        </ChromeGate>
         <Analytics />
       </body>
     </html>

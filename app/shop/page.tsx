@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ProductGrid } from "@/components/shop/ProductGrid";
-import { PRODUCTS } from "@/data/products";
+import { getProducts } from "@/lib/store";
 
 export const metadata: Metadata = {
   title: "Shop",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Everyday performance wear and match-weight kit, cut and finished to one standard.",
 };
 
-export default function Page() {
+export default async function Page() {
   return (
     <>
       <PageHeader
@@ -17,7 +17,7 @@ export default function Page() {
         title="One cloth. Many movements."
         lede="Twelve pieces across three lines. Everyday wear that performs, training pieces built around heat and range, and match kit you can order one at a time or by the side."
       />
-      <ProductGrid products={PRODUCTS} />
+      <ProductGrid products={await getProducts()} />
     </>
   );
 }

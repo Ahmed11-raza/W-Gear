@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { STORIES, getStory, storiesByDate, formatStoryDate } from "@/data/stories";
+import { formatStoryDate } from "@/data/stories";
+import { getStories, getStory } from "@/lib/store";
 
-export function generateStaticParams() {
-  return STORIES.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  return (await getStories()).map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({
@@ -13,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const story = getStory(slug);
+  const story = await getStory(slug);
   if (!story) return {};
 
   return {
@@ -30,10 +31,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const story = getStory(slug);
+  const story = await getStory(slug);
   if (!story) notFound();
 
-  const more = storiesByDate().filter((s) => s.slug !== story.slug).slice(0, 2);
+  const more = (await getStories()).filter((s) => s.slug !== story.slug).slice(0, 2);
 
   return (
     <article className="pt-[clamp(7rem,14vw,11rem)]">

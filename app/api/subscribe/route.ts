@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { db, schema } from "@/db";
 
 /**
  * Email capture.
@@ -7,12 +8,9 @@ import { NextResponse } from "next/server";
  * an address, that traffic is bought once and lost; with one it can be brought
  * back at no further acquisition cost. This is the endpoint behind that.
  *
- * Like the teamwear handler, this validates properly and then stops at a marked
- * delivery boundary — nothing is stored or sent, and the response says so, so
- * the UI can tell the truth (brief 53).
- *
- * To make it live, set MAILING_LIST_ENDPOINT to a provider's ingest URL and
- * replace the marked block with the forwarding call.
+ * Addresses are stored in the database and appear in the admin panel, where
+ * they can be exported. Sending mail is a separate concern: wire an email
+ * provider when there is something to send.
  */
 
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -37,12 +35,17 @@ export async function POST(request: Request) {
 
   const source = SOURCES.has(payload.source ?? "") ? payload.source : "unknown";
 
-  // ---- DELIVERY BOUNDARY ---------------------------------------------------
-  // Nothing is stored. Replace with the real list provider, e.g.
-  //   await fetch(process.env.MAILING_LIST_ENDPOINT!, { ... })
-  // Until then this build must not claim the address was kept.
-  // --------------------------------------------------------------------------
-  const delivered = false;
+  // Stored in the admin panel's subscriber list. Re-subscribing is not an
+  // error — it just refreshes the source rather than rejecting the address.
+  await db
+    .insert(schema.subscribers)
+    .values({ email, source: source ?? "unknown" })
+    .onConflictDoUpdate({
+      target: schema.subscribers.email,
+      set: { source: source ?? "unknown", unsubscribedAt: null },
+    });
+
+  const delivered = true;
 
   return NextResponse.json({ delivered, source }, { status: 200 });
 }

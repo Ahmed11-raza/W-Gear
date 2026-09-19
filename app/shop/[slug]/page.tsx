@@ -4,11 +4,10 @@ import { notFound } from "next/navigation";
 import { ProductPurchase } from "@/components/shop/ProductPurchase";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { Reveal } from "@/components/motion/Reveal";
-import { PRODUCTS, getProduct, relatedProducts } from "@/data/products";
-import { getCollection } from "@/data/collections";
+import { getProducts, getProduct, relatedProducts, getCollections } from "@/lib/store";
 
-export function generateStaticParams() {
-  return PRODUCTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getProducts()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -17,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
   if (!product) return {};
 
   return {
@@ -35,10 +34,11 @@ const FIT_NOTE: Record<string, string> = {
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
   if (!product) notFound();
 
-  const related = relatedProducts(product);
+  const related = await relatedProducts(product);
+  const allCollections = await getCollections();
 
   return (
     <article className="pt-[clamp(6rem,12vw,9rem)]">
@@ -107,7 +107,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
             <div className="mt-10 flex flex-wrap gap-2">
               {product.collections.map((c) => {
-                const collection = getCollection(c);
+                const collection = allCollections.find((x) => x.slug === c);
                 if (!collection) return null;
                 return (
                   <Link

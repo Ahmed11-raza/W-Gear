@@ -8,8 +8,7 @@ import { JournalRail } from "@/components/sections/JournalRail";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { BrandImage } from "@/components/ui/BrandImage";
 import { resolveSlot } from "@/lib/images";
-import { featuredProducts } from "@/data/products";
-import { storiesByDate } from "@/data/stories";
+import { featuredProducts, getStories } from "@/lib/store";
 
 /**
  * Home — the narrative set out in brief 11.
@@ -23,7 +22,7 @@ import { storiesByDate } from "@/data/stories";
  * sections as rendered children — so the filesystem check stays server-side and
  * the sections stay unaware of where their media came from.
  */
-export default function HomePage() {
+export default async function HomePage() {
   const hero = resolveSlot("hero-primary");
   const everyday = resolveSlot("split-everyday");
   const teamwear = resolveSlot("split-teamwear");
@@ -62,7 +61,7 @@ export default function HomePage() {
         }
       />
 
-      <FeaturedCollection products={featuredProducts()} />
+      <FeaturedCollection products={await featuredProducts()} />
 
       <MaterialStory
         human={
@@ -79,7 +78,7 @@ export default function HomePage() {
 
       <TeamwearIntro />
 
-      <JournalRail stories={storiesByDate()} />
+      <JournalRail stories={await getStories()} />
 
       <ClosingCTA />
     </>

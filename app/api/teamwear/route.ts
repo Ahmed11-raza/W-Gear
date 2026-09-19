@@ -1,15 +1,12 @@
 import { NextResponse } from "next/server";
+import { db, schema } from "@/db";
 
 /**
  * Teamwear request endpoint.
  *
- * This is a real handler: it validates the payload server-side and rejects bad
- * input with a usable message. What it does NOT do is deliver the request
- * anywhere — there is no inbox, CRM or order system connected in this build.
- * The success response says so, and so does the UI (brief 53: never pretend
- * prototype behaviour is real).
- *
- * To make it live, replace the marked block with a real delivery call.
+ * Validates the payload server-side, then records it as a lead. The admin
+ * panel is the inbox: every request shows up under Leads with its contact
+ * details and a status you can move through as you work it.
  */
 
 interface Payload {
@@ -17,6 +14,8 @@ interface Payload {
   garment?: string | null;
   quantity?: number;
   contact?: { name?: string; whatsapp?: string; email?: string };
+  notes?: string;
+  source?: string;
 }
 
 export async function POST(request: Request) {
@@ -51,12 +50,20 @@ export async function POST(request: Request) {
     );
   }
 
-  // ---- DELIVERY BOUNDARY -------------------------------------------------
-  // Nothing is sent. Replace this with the real integration (email, CRM,
-  // WhatsApp Business API) and update the prototype notice in ReviewStep.
-  // ------------------------------------------------------------------------
-
   const reference = `TW-${Date.now().toString(36).toUpperCase()}`;
 
-  return NextResponse.json({ reference, delivered: false }, { status: 200 });
+  await db.insert(schema.leads).values({
+    reference,
+    sport: payload.sport ?? null,
+    garment: payload.garment ?? null,
+    quantity: payload.quantity ?? null,
+    name: name!,
+    organisation: null,
+    whatsapp: whatsapp || null,
+    email: email || null,
+    notes: typeof payload.notes === "string" ? payload.notes : null,
+    source: typeof payload.source === "string" ? payload.source : "teamwear",
+  });
+
+  return NextResponse.json({ reference, delivered: true }, { status: 200 });
 }

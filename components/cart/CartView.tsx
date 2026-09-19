@@ -4,7 +4,7 @@ import Link from "next/link";
 import { removeLine, setLineQuantity, useCart } from "./useCart";
 import { GarmentRender } from "@/components/ui/GarmentRender";
 import { ButtonLink } from "@/components/ui/Button";
-import { getProduct } from "@/data/products";
+import { lookupProduct as getProduct } from "@/lib/catalogue";
 import { formatPrice } from "@/lib/brand";
 
 export function CartView() {

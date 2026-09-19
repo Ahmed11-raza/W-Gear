@@ -4,7 +4,7 @@ import { useCart, clearCart } from "@/components/cart/useCart";
 import { formatPrice } from "@/lib/brand";
 import Link from "next/link";
 import { X, ArrowRight, ShieldCheck, Truck } from "lucide-react";
-import { getProduct } from "@/data/products";
+import { lookupProduct as getProduct } from "@/lib/catalogue";
 
 interface CartDrawerProps {
   open: boolean;

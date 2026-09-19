@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ProductGrid } from "@/components/shop/ProductGrid";
-import { COLLECTIONS, getCollection } from "@/data/collections";
-import { productsInCollection } from "@/data/products";
+import { getCollections, getCollection, productsInCollection } from "@/lib/store";
 
-export function generateStaticParams() {
-  return COLLECTIONS.map((c) => ({ slug: c.slug }));
+export async function generateStaticParams() {
+  return (await getCollections()).map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const collection = getCollection(slug);
+  const collection = await getCollection(slug);
   if (!collection) return {};
 
   return {
@@ -26,10 +25,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const collection = getCollection(slug);
+  const collection = await getCollection(slug);
   if (!collection) notFound();
 
-  const products = productsInCollection(collection.slug);
+  const products = await productsInCollection(collection.slug);
 
   return (
     <>

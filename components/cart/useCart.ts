@@ -2,7 +2,7 @@
 
 import { useMemo, useSyncExternalStore } from "react";
 import type { CartLine, SizeCode } from "@/types";
-import { getProduct } from "@/data/products";
+import { lookupProduct as getProduct } from "@/lib/catalogue";
 
 /**
  * DEMO CART.
