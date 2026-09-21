@@ -29,7 +29,7 @@ export const IMAGE_SLOTS = {
     path: "images/hero/primary.jpg",
     brief:
       "The opening frame of a campaign, not a banner. One athlete mid-movement, shot so the fabric is visibly reacting — a shirt catching air, a sleeve under tension. Hard directional light that reveals seams and weave. Urban or trail environment, Islamabad or Margalla, embedded not decorative. Frame loose enough that display type can sit across the image without covering the subject. Shoot vertical-safe: the mobile crop takes the centre third.",
-    alt: "An athlete mid-stride, fabric pulled taut by the movement",
+    alt: "Athletes sprinting along an urban concrete curve in high-performance sportswear",
     ratio: 16 / 9,
     priority: true,
   },
@@ -38,7 +38,7 @@ export const IMAGE_SLOTS = {
     path: "images/split/everyday.jpg",
     brief:
       "One person, sportswear worn off the field — walking a street, on campus, in transit. Not training. The garment reads as everyday clothing that happens to perform. Calm, unposed, real light.",
-    alt: "A person wearing sportswear on a city street",
+    alt: "Male athlete in stone tracksuit leaning against a concrete pillar in a minimalist city courtyard",
     ratio: 3 / 4,
   },
   "split-teamwear": {
@@ -46,7 +46,7 @@ export const IMAGE_SLOTS = {
     path: "images/split/teamwear.jpg",
     brief:
       "A team in matching kit — three or more people, shot as a unit rather than as individuals. Identical garments, shared identity. Court, pitch or ground. The counterweight to the everyday frame: collective where that one is solitary.",
-    alt: "A team in matching kit, photographed together",
+    alt: "A squad of male runners in athletic kit sprinting together under concrete colonnades",
     ratio: 3 / 4,
   },
   "movement-editorial": {
@@ -54,7 +54,7 @@ export const IMAGE_SLOTS = {
     path: "images/editorial/movement.jpg",
     brief:
       "The lifestyle counterpart to the fabric macro it sits beside. One athlete in motion, shot wide enough that the environment is legible — Islamabad street, Margalla trail, court or concrete. Pakistan embedded in the frame as place, not decoration: no flags, no truck art, no national symbolism. Vertical crop must survive, since the mobile composition stacks this above the texture. Leave the upper third calm; display type crosses it.",
-    alt: "An athlete moving through a city environment",
+    alt: "Male runner in navy technical base layer sprinting with dramatic diagonal concrete shadow",
     ratio: 4 / 5,
   },
   "fabric-macro": {
