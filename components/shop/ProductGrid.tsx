@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import type { Product } from "@/types";
@@ -53,36 +53,8 @@ export function ProductGrid({ products }: { products: Product[] }) {
 
   return (
     <>
-      {/* Warm Mineral Luxury Store Hero Bar */}
-      <section className="bg-surface border-b border-line py-8 sm:py-10">
-        <div className="gutter">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <span className="text-spec text-accent-text uppercase tracking-widest font-bold">
-                Direct from Sialkot Workshops
-              </span>
-              <h1 className="mt-2 font-display text-[2rem] sm:text-[2.75rem] font-black tracking-[-0.03em] text-ink uppercase leading-none">
-                The Performance Store
-              </h1>
-              <p className="mt-3 text-muted text-[0.9375rem] max-w-[55ch] leading-relaxed">
-                Precision garments cut for high-demand training and effortless urban lifestyle. Rigorously tested for humidity regulation across Pakistan.
-              </p>
-            </div>
-
-            {/* Quick trust metrics */}
-            <div className="flex flex-wrap items-center gap-4 text-xs text-ink-soft">
-              <div className="flex items-center gap-1.5 bg-canvas px-3 py-2 border border-line">
-                <Truck className="w-3.5 h-3.5 text-accent-text" />
-                <span>Nationwide 2-3 Day TCS</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-canvas px-3 py-2 border border-line">
-                <ShieldCheck className="w-3.5 h-3.5 text-accent-text" />
-                <span>Doorstep Inspection Allowed</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Interactive Filter & Sort Toolbar */}
+      <div id="catalog" className="scroll-mt-20"></div>
 
       {/* Interactive Filter & Sort Toolbar */}
       <div className="sticky top-[68px] md:top-[76px] z-30 bg-canvas/95 backdrop-blur-md border-b border-line py-3.5 shadow-xs">
