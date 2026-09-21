@@ -1,9 +1,10 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/types";
 import { GarmentRender } from "@/components/ui/GarmentRender";
 import { Reveal } from "@/components/motion/Reveal";
 import { formatPrice } from "@/lib/brand";
+import { getProductPhoto } from "@/lib/images";
 
 export function FeaturedCollection({ products }: { products: Product[] }) {
   const [lead, ...rest] = products.slice(0, 3);
@@ -61,14 +62,7 @@ function FeaturedPiece({
 }) {
   const colorway = product.colorways[0];
   const isLead = scale === "lead";
-
-  const photoMap: Record<string, string> = {
-    "meridian-training-tee": "/images/products/meridian-tee.jpg",
-    "baseline-performance-polo": "/images/products/baseline-polo.jpg",
-    "ridge-training-short": "/images/products/ridge-short.jpg",
-  };
-
-  const photo = photoMap[product.slug];
+  const photo = getProductPhoto(product.slug);
 
   return (
     <article className="group relative flex flex-col">

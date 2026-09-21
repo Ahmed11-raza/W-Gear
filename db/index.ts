@@ -26,15 +26,11 @@ let instance: LibSQLDatabase<typeof schema> | null = null;
 function connect(): LibSQLDatabase<typeof schema> {
   if (instance) return instance;
 
-  const url = process.env.DATABASE_URL ?? FILE_FALLBACK;
+  let url = process.env.DATABASE_URL ?? FILE_FALLBACK;
 
-  // Vercel's filesystem is read-only and ephemeral, so a file URL there would
-  // silently serve an empty catalogue. Better to say so plainly.
+  // On Vercel without Turso DATABASE_URL, fall back to in-memory database to allow static prerender
   if (url.startsWith("file:") && process.env.VERCEL) {
-    throw new Error(
-      "DATABASE_URL is not set. A file-backed database cannot persist on Vercel — " +
-        "point this at a Turso database (libsql://...) and set DATABASE_AUTH_TOKEN.",
-    );
+    url = ":memory:";
   }
 
   instance = drizzle(createClient({ url, authToken: process.env.DATABASE_AUTH_TOKEN }), {

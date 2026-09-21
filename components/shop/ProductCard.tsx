@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import type { Product } from "@/types";
 import { GarmentRender } from "@/components/ui/GarmentRender";
 import { formatPrice } from "@/lib/brand";
 import { inStock } from "@/data/products";
+import { getProductPhoto } from "@/lib/images";
 import { cn } from "@/lib/cn";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -14,13 +15,7 @@ export function ProductCard({ product }: { product: Product }) {
   const colorway = product.colorways[active];
   const available = inStock(product);
 
-  const photoMap: Record<string, string> = {
-    "meridian-training-tee": "/images/products/meridian-tee.jpg",
-    "baseline-performance-polo": "/images/products/baseline-polo.jpg",
-    "ridge-training-short": "/images/products/ridge-short.jpg",
-  };
-
-  const photo = photoMap[product.slug];
+  const photo = getProductPhoto(product.slug);
 
   return (
     <article className="group relative flex flex-col bg-surface border border-line p-3 transition-shadow duration-200 hover:shadow-md">

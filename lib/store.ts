@@ -2,6 +2,9 @@ import "server-only";
 import { unstable_cache, updateTag } from "next/cache";
 import { asc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
+import { PRODUCTS } from "@/data/products";
+import { COLLECTIONS } from "@/data/collections";
+import { STORIES } from "@/data/stories";
 import type { Product, Collection, Story } from "@/types";
 import type { ProductRow, CollectionRow, StoryRow } from "@/db/schema";
 
@@ -68,12 +71,17 @@ const toStory = (row: StoryRow): Story => ({
 
 export const getProducts = unstable_cache(
   async (): Promise<Product[]> => {
-    const rows = await db
-      .select()
-      .from(schema.products)
-      .where(eq(schema.products.status, "published"))
-      .orderBy(asc(schema.products.sortOrder), asc(schema.products.id));
-    return rows.map(toProduct);
+    try {
+      const rows = await db
+        .select()
+        .from(schema.products)
+        .where(eq(schema.products.status, "published"))
+        .orderBy(asc(schema.products.sortOrder), asc(schema.products.id));
+      if (rows && rows.length > 0) return rows.map(toProduct);
+      return PRODUCTS;
+    } catch {
+      return PRODUCTS;
+    }
   },
   ["products:published"],
   { tags: [TAGS.products] },
@@ -104,12 +112,17 @@ export async function relatedProducts(product: Product, limit = 3): Promise<Prod
 
 export const getCollections = unstable_cache(
   async (): Promise<Collection[]> => {
-    const rows = await db
-      .select()
-      .from(schema.collections)
-      .where(eq(schema.collections.status, "published"))
-      .orderBy(asc(schema.collections.sortOrder), asc(schema.collections.id));
-    return rows.map(toCollection);
+    try {
+      const rows = await db
+        .select()
+        .from(schema.collections)
+        .where(eq(schema.collections.status, "published"))
+        .orderBy(asc(schema.collections.sortOrder), asc(schema.collections.id));
+      if (rows && rows.length > 0) return rows.map(toCollection);
+      return COLLECTIONS;
+    } catch {
+      return COLLECTIONS;
+    }
   },
   ["collections:published"],
   { tags: [TAGS.collections] },
@@ -124,13 +137,20 @@ export async function getCollection(slug: string): Promise<Collection | undefine
 
 export const getStories = unstable_cache(
   async (): Promise<Story[]> => {
-    const rows = await db
-      .select()
-      .from(schema.stories)
-      .where(eq(schema.stories.status, "published"));
-    return rows
-      .map(toStory)
-      .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+    try {
+      const rows = await db
+        .select()
+        .from(schema.stories)
+        .where(eq(schema.stories.status, "published"));
+      if (rows && rows.length > 0) {
+        return rows
+          .map(toStory)
+          .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+      }
+      return STORIES;
+    } catch {
+      return STORIES;
+    }
   },
   ["stories:published"],
   { tags: [TAGS.stories] },

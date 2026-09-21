@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { GarmentRender } from "@/components/ui/GarmentRender";
 import { Button } from "@/components/ui/Button";
 import { addLine } from "@/components/cart/useCart";
 import { trackAddToCart } from "@/lib/track";
+import { getProductPhoto } from "@/lib/images";
 import { BRAND, formatPrice, whatsappLink } from "@/lib/brand";
 import { cn } from "@/lib/cn";
 import { ShieldCheck, Truck, Ruler, CheckCircle2 } from "lucide-react";
@@ -26,13 +27,7 @@ export function ProductPurchase({ product }: { product: Product }) {
   const variant = product.variants.find((v) => v.size === size);
   const maxQuantity = variant?.stock ?? 1;
 
-  const photoMap: Record<string, string> = {
-    "meridian-training-tee": "/images/products/meridian-tee.jpg",
-    "baseline-performance-polo": "/images/products/baseline-polo.jpg",
-    "ridge-training-short": "/images/products/ridge-short.jpg",
-  };
-
-  const photo = photoMap[product.slug];
+  const photo = getProductPhoto(product.slug);
 
   const enquiry = whatsappLink(
     `Hello ${BRAND.name} — I have a question about the ${product.name} (${colorway.name}).`,
