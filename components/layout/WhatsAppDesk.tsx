@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { MessageCircle, X, Send, ShieldCheck, Sparkles } from "lucide-react";
@@ -35,7 +35,7 @@ export function WhatsAppDesk() {
           <div className="flex items-center justify-between pb-3 border-b border-line">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-ink text-inverse flex items-center justify-center font-black text-xs">
-                IW
+                WG
               </div>
               <div>
                 <p className="text-[0.8125rem] font-bold text-ink leading-none">{BRAND.name} Concierge</p>

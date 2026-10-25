@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { DemoNotice } from "@/components/layout/DemoNotice";
 import { WhatsAppDesk } from "@/components/layout/WhatsAppDesk";
+import { CommunityModal } from "@/components/layout/CommunityModal";
 import { Analytics } from "@/components/analytics/Analytics";
 import { ChromeGate } from "@/components/layout/ChromeGate";
 import { CatalogueSync } from "@/components/catalogue/CatalogueSync";
@@ -65,6 +66,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
           <DemoNotice />
           <WhatsAppDesk />
+          <CommunityModal />
         </ChromeGate>
         <Analytics />
       </body>

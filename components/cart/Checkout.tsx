@@ -68,9 +68,10 @@ export function Checkout() {
 
   const currentAreas = cityAreas[details.city] || ["Central Area", "Other Area"];
 
-  // 5% discount for Raast instant prepaid transfer
+  // Online payments (Raast or Card) get FREE shipping (Save Rs 300 of shipping by paying online)
+  const isOnlinePayment = details.paymentMethod === "raast" || details.paymentMethod === "card";
+  const deliveryFee = isOnlinePayment ? 0 : 300;
   const raastDiscount = details.paymentMethod === "raast" ? Math.round(subtotal * 0.05) : 0;
-  const deliveryFee = subtotal >= 6000 ? 0 : 250;
   const grandTotal = Math.max(0, subtotal + deliveryFee - raastDiscount);
 
   function validate(): boolean {
@@ -91,7 +92,7 @@ export function Checkout() {
     event.preventDefault();
     if (!validate()) return;
 
-    const orderRef = `IW-${Date.now().toString(36).toUpperCase()}`;
+    const orderRef = `WG-${Date.now().toString(36).toUpperCase()}`;
     trackPurchase(
       lines.flatMap((line) => {
         const item = getProduct(line.productSlug);
@@ -315,9 +316,27 @@ export function Checkout() {
 
         {/* Payment options */}
         <div className="space-y-4 pt-2">
-          <h2 className="text-spec text-muted pb-2 border-b border-line uppercase tracking-wider font-bold">
-            3. Payment Method
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-line">
+            <h2 className="text-spec text-muted uppercase tracking-wider font-bold">
+              3. Payment Method
+            </h2>
+            <span className="text-[0.6875rem] font-bold text-accent-text tracking-wide uppercase bg-accent-muted/60 px-2 py-0.5 border border-accent/30">
+              Save Rs 300 of shipping by paying online
+            </span>
+          </div>
+
+          {/* Online Shipping Incentive Banner */}
+          <div className="p-3.5 bg-accent-muted/40 border border-accent/40 flex items-start gap-2.5 text-xs">
+            <ShieldCheck className="w-4 h-4 text-accent-text shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-ink">
+                Save Rs 300 of shipping by paying online
+              </p>
+              <p className="text-muted mt-0.5 leading-relaxed">
+                Choose Raast Instant QR or Debit/Credit Card to get 100% Free Nationwide Express Delivery. Standard Cash on Delivery is Rs 300.
+              </p>
+            </div>
+          </div>
 
           <div className="space-y-3">
             <label
@@ -335,13 +354,16 @@ export function Checkout() {
                   onChange={() => setDetails((d) => ({ ...d, paymentMethod: "cod" }))}
                   className="mt-1"
                 />
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Banknote className="w-4 h-4 text-ink" />
-                    <span className="font-bold text-sm text-ink">Cash on Delivery (Doorstep Inspection)</span>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <Banknote className="w-4 h-4 text-ink" />
+                      <span className="font-bold text-sm text-ink">Cash on Delivery (Doorstep Inspection)</span>
+                    </div>
+                    <span className="text-spec text-muted font-bold">+Rs 300 Shipping</span>
                   </div>
                   <p className="text-xs text-muted mt-1 leading-relaxed">
-                    Inspect the parcel and garment fabric quality at your doorstep before handing cash to the TCS courier rider.
+                    Inspect the parcel and garment fabric quality at your doorstep before handing cash to the TCS courier rider. Standard shipping fee is Rs 300. <strong className="text-ink">Save Rs 300 of shipping by paying online.</strong>
                   </p>
                 </div>
               </div>
@@ -362,14 +384,16 @@ export function Checkout() {
                   onChange={() => setDetails((d) => ({ ...d, paymentMethod: "raast" }))}
                   className="mt-1"
                 />
-                <div>
-                  <div className="flex items-center gap-2">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <QrCode className="w-4 h-4 text-accent-text" />
                     <span className="font-bold text-sm text-ink">Instant Raast QR / IBFT (5% Privilege)</span>
-                    <span className="text-[0.625rem] bg-accent-text text-inverse font-bold px-1.5 py-0.5">SAVE 5%</span>
+                    <span className="text-[0.625rem] bg-accent text-accent-text font-black px-1.5 py-0.5 tracking-wider uppercase">
+                      SAVE RS 300 SHIPPING + 5% OFF
+                    </span>
                   </div>
                   <p className="text-xs text-muted mt-1 leading-relaxed">
-                    Zero-fee instant transfer via Meezan Bank, HBL, Nayapay, or SadaPay.
+                    <strong className="text-ink">Save Rs 300 of shipping by paying online.</strong> Zero-fee instant transfer via Meezan Bank, HBL, Nayapay, or SadaPay plus an additional 5% online prepayment privilege.
                   </p>
                 </div>
               </div>
@@ -390,13 +414,16 @@ export function Checkout() {
                   onChange={() => setDetails((d) => ({ ...d, paymentMethod: "card" }))}
                   className="mt-1"
                 />
-                <div>
-                  <div className="flex items-center gap-2">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <CreditCard className="w-4 h-4 text-ink" />
                     <span className="font-bold text-sm text-ink">Visa & Mastercard (3D Secure)</span>
+                    <span className="text-[0.625rem] bg-accent text-accent-text font-black px-1.5 py-0.5 tracking-wider uppercase">
+                      SAVE RS 300 SHIPPING
+                    </span>
                   </div>
                   <p className="text-xs text-muted mt-1 leading-relaxed">
-                    Encrypted bank card transfer with OTP verification.
+                    <strong className="text-ink">Save Rs 300 of shipping by paying online.</strong> Encrypted bank card transfer with OTP verification.
                   </p>
                 </div>
               </div>
@@ -447,11 +474,29 @@ export function Checkout() {
             <span>Subtotal</span>
             <span className="text-ink font-bold">{formatPrice(subtotal)}</span>
           </div>
-          <div className="flex justify-between text-muted">
-            <span>Nationwide TCS Express</span>
-            <span className="text-accent-text font-bold">
-              {deliveryFee === 0 ? "FREE" : formatPrice(deliveryFee)}
-            </span>
+          <div className="flex justify-between items-baseline text-muted">
+            <div>
+              <span>Nationwide TCS Express</span>
+              {isOnlinePayment ? (
+                <span className="block text-[0.6875rem] text-accent-text font-semibold">
+                  Save Rs 300 of shipping by paying online (Applied)
+                </span>
+              ) : (
+                <span className="block text-[0.6875rem] text-muted">
+                  Tip: Save Rs 300 of shipping by paying online
+                </span>
+              )}
+            </div>
+            <div className="text-right">
+              {isOnlinePayment ? (
+                <span>
+                  <s className="text-muted text-[0.6875rem] mr-1.5">Rs 300</s>
+                  <span className="text-accent-text font-bold">FREE</span>
+                </span>
+              ) : (
+                <span className="text-ink font-bold">{formatPrice(deliveryFee)}</span>
+              )}
+            </div>
           </div>
           {raastDiscount > 0 && (
             <div className="flex justify-between text-accent-text font-semibold">
