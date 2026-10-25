@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { SPORTS, GARMENTS } from "@/data/teamwear";
-import { whatsappLink } from "@/lib/brand";
+import { BRAND, whatsappLink } from "@/lib/brand";
 import { trackLead } from "@/lib/track";
 
 /**
@@ -204,7 +204,7 @@ export function QuoteRequest() {
 function WhatsAppAlternative({ sport, quantity }: { sport: string; quantity: string }) {
   const sportName = SPORTS.find((s) => s.id === sport)?.name ?? "team";
   const href = whatsappLink(
-    `Hi I-WEAR, I need a teamwear quote — ${sportName}, about ${quantity} units.`,
+    `Hi ${BRAND.wordmark}, I need a teamwear quote — ${sportName}, about ${quantity} units.`,
   );
 
   if (!href) return null;

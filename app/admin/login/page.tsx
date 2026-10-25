@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BRAND } from "@/lib/brand";
 import { authConfigured } from "@/lib/auth";
 import { LoginForm } from "@/components/admin/LoginForm";
 
@@ -16,7 +17,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-[#101214] px-5 text-[#e6e8ea]">
       <div className="w-full max-w-[24rem]">
         <p className="text-[0.75rem] font-bold uppercase tracking-[0.14em] text-white/40">
-          I-Wear Admin
+          {BRAND.name} Admin
         </p>
         <h1 className="mt-3 text-[1.75rem] font-bold tracking-[-0.02em]">Sign in</h1>
 

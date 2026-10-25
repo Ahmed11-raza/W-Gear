@@ -1,4 +1,4 @@
-﻿/**
+/**
  * THE SINGLE RENAME POINT.
  *
  * The brand name is not locked (brief 01). Everything user-facing reads from
@@ -12,18 +12,18 @@
 
 export const BRAND = {
   /** Display wordmark. Change this one value to rename the brand. */
-  name: "I-Wear",
+  name: "W-Gear",
   /** Used where the wordmark is set in display type and needs no punctuation. */
-  wordmark: "I-WEAR",
+  wordmark: "W-GEAR",
   /** DEMO. Replace with the registered entity once incorporation completes. */
-  legalName: "I-Wear Performance Apparel (Pvt) Ltd",
+  legalName: "W-Gear Performance Apparel (Pvt) Ltd",
 
   tagline: "Made to move. Built for everyday.",
   description:
     "A sportswear brand engineered for Pakistan's urban climate and movement. Masterfully manufactured in Sialkot. Everyday performance wear and custom club teamwear.",
 
   /** DEMO origin. Drives metadataBase, canonicals and Open Graph URLs. */
-  url: "https://demo.i-wear.pk",
+  url: "https://demo.w-gear.pk",
   locale: "en_PK",
 
   contact: {
@@ -33,7 +33,7 @@ export const BRAND = {
      * the real number the moment this value is replaced.
      */
     whatsapp: "923001234567",
-    email: "concierge@i-wear.pk",
+    email: "concierge@w-gear.pk",
     city: "Pakistan",
     manufacturingHub: "Sialkot, Punjab",
     studio: "Lahore / Karachi / Islamabad Concierge Desk",
@@ -42,9 +42,9 @@ export const BRAND = {
 
   /** DEMO profile URLs — these accounts do not exist. */
   social: {
-    instagram: "https://instagram.com/iwear.pk",
-    tiktok: "https://tiktok.com/@iwear.pk",
-    youtube: "https://youtube.com/@iwear-pk",
+    instagram: "https://instagram.com/wgear.pk",
+    tiktok: "https://tiktok.com/@wgear.pk",
+    youtube: "https://youtube.com/@wgear-pk",
   },
 } as const;
 

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BRAND } from "@/lib/brand";
+import { Logo } from "@/components/ui/Logo";
+import { cn } from "@/lib/cn";
 import { NAV_LINKS } from "./Header";
 
 /**
@@ -10,7 +12,7 @@ import { NAV_LINKS } from "./Header";
  * dependence on hover. Escape closes, focus is trapped while open, background
  * scroll is locked, and focus returns to the trigger on close.
  */
-export function MobileNav() {
+export function MobileNav({ isDark = false }: { isDark?: boolean }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -71,8 +73,8 @@ export function MobileNav() {
       >
         <span className="sr-only">Open menu</span>
         <span aria-hidden className="flex flex-col gap-[5px]">
-          <span className="block h-px w-6 bg-ink" />
-          <span className="block h-px w-6 bg-ink" />
+          <span className={cn("block h-px w-6 transition-colors", isDark ? "bg-canvas" : "bg-ink")} />
+          <span className={cn("block h-px w-6 transition-colors", isDark ? "bg-canvas" : "bg-ink")} />
         </span>
       </button>
 
@@ -86,9 +88,9 @@ export function MobileNav() {
         className="fixed inset-0 z-[60] bg-canvas flex flex-col"
       >
         <div className="gutter flex items-center justify-between h-[68px] border-b border-line">
-          <span className="font-display font-extrabold text-[1.0625rem] tracking-[-0.02em] uppercase">
-            {BRAND.wordmark}
-          </span>
+          <Link href="/" onClick={close} className="flex items-center">
+            <Logo variant="dark" size="sm" />
+          </Link>
           <button
             type="button"
             onClick={close}

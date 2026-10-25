@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { BRAND } from "@/lib/brand";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { PublishButton } from "@/components/admin/PublishButton";
 
@@ -24,7 +25,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="mx-auto flex h-14 max-w-[90rem] items-center justify-between gap-6 px-5">
           <div className="flex items-center gap-6">
             <Link href="/admin" className="text-[0.8125rem] font-bold tracking-[0.12em] uppercase">
-              I-Wear&nbsp;<span className="text-white/40">Admin</span>
+              {BRAND.name}&nbsp;<span className="text-white/40">Admin</span>
             </Link>
             <AdminNav />
           </div>

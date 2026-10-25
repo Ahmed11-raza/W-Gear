@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, type FormEvent } from "react";
 import { clearCart, useCart } from "./useCart";
@@ -174,7 +174,7 @@ export function Checkout() {
           <div className="p-4 bg-canvas border border-line text-xs space-y-1">
             <p className="font-bold text-ink">Raast Transfer Details:</p>
             <p className="text-muted">Raast ID: <strong>0300-1234567</strong> &bull; Bank: Meezan Bank Ltd</p>
-            <p className="text-muted">Account Title: <strong>I-Wear Performance Apparel</strong></p>
+            <p className="text-muted">Account Title: <strong>{BRAND.legalName}</strong></p>
           </div>
         )}
 

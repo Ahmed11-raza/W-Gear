@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/motion/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
@@ -45,7 +45,7 @@ export default function Page() {
               Sportswear in Pakistan has long suffered a compromise: expensive international imports with steep markups, or generic local gear that neglects tailored fit, longevity, and modern aesthetics.
             </p>
             <p className="text-ink-soft" style={{ fontSize: "var(--text-lede)" }}>
-              I-Wear bridges this gap. We leverage Sialkot&apos;s world-class manufacturing heritage to produce athletic wear with architectural precision, premium matte finishes, and climate-adapted breathability.
+              W-Gear bridges this gap. We leverage Sialkot&apos;s world-class manufacturing heritage to produce athletic wear with architectural precision, premium matte finishes, and climate-adapted breathability.
             </p>
             <p className="text-ink-soft" style={{ fontSize: "var(--text-lede)" }}>
               From Karachi&apos;s maritime humidity to Lahore&apos;s intense summers and Islamabad&apos;s varied seasons, our pieces regulate heat and retain shape through hundreds of high-intensity cycles.

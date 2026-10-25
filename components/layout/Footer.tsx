@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BRAND, isConfigured } from "@/lib/brand";
+import { Logo } from "@/components/ui/Logo";
 import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 
 const COLUMNS = [
@@ -48,9 +49,9 @@ export function Footer() {
       <div className="gutter py-[clamp(3rem,7vw,6rem)]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
-            <p className="font-display text-[clamp(2rem,4.5vw,3.25rem)] font-extrabold uppercase tracking-[-0.035em] leading-[0.92]">
-              {BRAND.wordmark}
-            </p>
+            <Link href="/" className="inline-flex items-center mb-1">
+              <Logo variant="dark" size="lg" />
+            </Link>
             <p className="mt-4 max-w-[34ch] text-muted">{BRAND.description}</p>
             <p className="text-spec mt-6 text-muted">{BRAND.contact.city}</p>
 

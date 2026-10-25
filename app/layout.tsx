@@ -1,4 +1,4 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { fontClassNames } from "@/lib/fonts";
 import { BRAND } from "@/lib/brand";
 import { Header } from "@/components/layout/Header";
@@ -29,6 +29,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${BRAND.name} — ${BRAND.tagline}`,
     description: BRAND.description,
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/images/logo/icon-192.png",
+    apple: "/images/logo/icon-512.png",
   },
 };
 
