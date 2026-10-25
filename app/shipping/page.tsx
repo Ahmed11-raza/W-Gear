@@ -77,10 +77,24 @@ export default function Page() {
           </div>
         </section>
 
-        <section aria-labelledby="returns-heading" className="mt-16 max-w-[68ch]">
+        <section id="returns" aria-labelledby="returns-heading" className="mt-16 max-w-[68ch]">
           <h2 id="returns-heading" className="text-spec text-muted">
-            Returns
+            Returns &bull; Easy Cash Back Policy
           </h2>
+
+          {/* Easy Cash Back Policy Ribbon Box */}
+          <div className="mt-6 p-5 bg-accent-muted/40 border border-accent/40 space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-accent-text" />
+              <h3 className="font-display font-extrabold text-[1.125rem] text-ink uppercase tracking-tight">
+                Easy Cash Back Policy Guarantee
+              </h3>
+            </div>
+            <p className="text-sm text-ink-soft leading-relaxed">
+              We stand behind every garment engineered in our Sialkot atelier. If any piece does not fit your exact requirements or athletic standards, return it within <strong>7 days of delivery</strong> for an instant, full refund directly to your bank account or Raast ID. No complicated forms, no hidden deductions.
+            </p>
+          </div>
+
           <dl className="mt-8 border-t border-line">
             {FAQ.map((item) => (
               <div key={item.q} className="border-b border-line py-6">

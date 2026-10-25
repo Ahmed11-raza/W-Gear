@@ -7,7 +7,7 @@ import { lookupProduct as getProduct } from "@/lib/catalogue";
 import { BRAND, formatPrice, whatsappLink } from "@/lib/brand";
 import { trackPurchase } from "@/lib/track";
 import { cn } from "@/lib/cn";
-import { ShieldCheck, Truck, Banknote, QrCode, CreditCard, CheckCircle2, MessageCircle } from "lucide-react";
+import { ShieldCheck, Truck, Banknote, QrCode, CreditCard, CheckCircle2, MessageCircle, RotateCcw } from "lucide-react";
 
 interface Details {
   name: string;
@@ -513,9 +513,15 @@ export function Checkout() {
           </p>
         </div>
 
-        <div className="mt-6 p-3.5 bg-canvas border border-line flex items-center gap-2 text-[0.6875rem] text-muted leading-snug">
-          <ShieldCheck className="w-4 h-4 text-accent-text shrink-0" />
-          <span>Doorstep Inspection Allowed: Check garment finish upon courier arrival</span>
+        {/* Easy Cash Back Policy Ribbon */}
+        <div className="mt-6 p-3.5 bg-accent-muted/40 border border-accent/40 space-y-1.5 text-xs">
+          <div className="flex items-center gap-2 font-bold text-ink text-[0.75rem]">
+            <RotateCcw className="w-4 h-4 text-accent-text shrink-0" />
+            <span>Easy Cash Back Policy &bull; 100% Guaranteed</span>
+          </div>
+          <p className="text-muted text-[0.6875rem] leading-relaxed">
+            7-day full refund guarantee. Inspect the fabric at your doorstep or request an instant refund direct to your bank or Raast account.
+          </p>
         </div>
       </aside>
     </div>

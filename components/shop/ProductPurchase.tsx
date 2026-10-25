@@ -11,7 +11,7 @@ import { trackAddToCart } from "@/lib/track";
 import { getProductPhoto } from "@/lib/images";
 import { BRAND, formatPrice, whatsappLink } from "@/lib/brand";
 import { cn } from "@/lib/cn";
-import { ShieldCheck, Truck, Ruler, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Truck, Ruler, CheckCircle2, RotateCcw } from "lucide-react";
 
 const LOW_STOCK = 6;
 
@@ -197,7 +197,20 @@ export function ProductPurchase({ product }: { product: Product }) {
             )}
           </div>
 
-          <div className="mt-6 pt-6 border-t border-line flex flex-wrap items-center justify-between gap-3 text-[0.75rem] text-muted">
+          {/* Easy Cash Back Policy Ribbon */}
+          <div className="mt-5 p-3.5 bg-accent-muted/40 border border-accent/40 flex items-start gap-3 text-xs">
+            <RotateCcw className="w-4 h-4 text-accent-text shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-ink uppercase tracking-wider text-[0.75rem]">
+                Easy Cash Back Policy &bull; 100% Guaranteed
+              </p>
+              <p className="text-muted text-[0.6875rem] mt-0.5 leading-relaxed">
+                Test the fit and performance with zero risk. If you are not completely satisfied, return within 7 days for an instant, hassle-free cash refund directly via Raast or bank transfer.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-5 pt-5 border-t border-line flex flex-wrap items-center justify-between gap-3 text-[0.75rem] text-muted">
             <span className="flex items-center gap-1.5">
               <Truck className="w-3.5 h-3.5 text-accent-text" />
               <span>Nationwide 2-3 Day Dispatch via TCS</span>

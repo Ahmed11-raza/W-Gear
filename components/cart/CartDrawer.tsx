@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useCart, clearCart } from "@/components/cart/useCart";
 import { formatPrice } from "@/lib/brand";
 import Link from "next/link";
-import { X, ArrowRight, ShieldCheck, Truck } from "lucide-react";
+import { X, ArrowRight, ShieldCheck, Truck, RotateCcw } from "lucide-react";
 import { lookupProduct as getProduct } from "@/lib/catalogue";
 
 interface CartDrawerProps {
@@ -121,9 +121,14 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                 </span>
               </div>
 
-              <div className="p-2.5 bg-canvas border border-line flex items-center gap-2 text-[0.6875rem] text-ink-soft">
-                <ShieldCheck className="w-4 h-4 text-accent-text shrink-0" />
-                <span>Doorstep Inspection allowed upon delivery</span>
+              <div className="p-2.5 bg-accent-muted/30 border border-accent/30 space-y-1 text-[0.6875rem]">
+                <div className="flex items-center gap-2 font-bold text-ink">
+                  <RotateCcw className="w-3.5 h-3.5 text-accent-text shrink-0" />
+                  <span>Easy Cash Back Policy Guaranteed</span>
+                </div>
+                <p className="text-muted text-[0.625rem] pl-5.5">
+                  7-Day 100% Money-Back Guarantee &bull; Doorstep inspection allowed
+                </p>
               </div>
 
               <div className="space-y-2">
