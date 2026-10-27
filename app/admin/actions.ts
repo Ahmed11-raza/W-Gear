@@ -226,6 +226,70 @@ export async function setLeadStatus(id: number, status: string) {
   revalidatePath("/admin/leads");
 }
 
+/* -------------------------------------------------------------- promotions */
+
+export async function updatePromotion(
+  productId: number,
+  compareAtPrice: number | null,
+  campaignName: string | null,
+) {
+  const actor = await requireActor();
+  const [product] = await db
+    .select({ price: schema.products.price })
+    .from(schema.products)
+    .where(eq(schema.products.id, productId));
+
+  const salePercent =
+    compareAtPrice && compareAtPrice > 0 && product
+      ? Math.round(((compareAtPrice - product.price) / compareAtPrice) * 100)
+      : null;
+
+  await db
+    .update(schema.products)
+    .set({ compareAtPrice, campaignName, salePercent, updatedAt: new Date() })
+    .where(eq(schema.products.id, productId));
+
+  await log(actor, "update-promotion", "product", String(productId), campaignName || "cleared");
+  revalidateStorefront();
+  revalidatePath("/admin/promotions");
+  revalidatePath("/admin/products");
+}
+
+export async function clearPromotion(productId: number) {
+  const actor = await requireActor();
+  await db
+    .update(schema.products)
+    .set({
+      compareAtPrice: null,
+      campaignName: null,
+      salePercent: null,
+      updatedAt: new Date(),
+    })
+    .where(eq(schema.products.id, productId));
+
+  await log(actor, "clear-promotion", "product", String(productId));
+  revalidateStorefront();
+  revalidatePath("/admin/promotions");
+  revalidatePath("/admin/products");
+}
+
+/* ----------------------------------------------------------------- tracking */
+
+export async function updateTracking(
+  orderId: number,
+  trackingNumber: string,
+  courierName: string,
+) {
+  const actor = await requireActor();
+  await db
+    .update(schema.orders)
+    .set({ trackingNumber, courierName, updatedAt: new Date() })
+    .where(eq(schema.orders.id, orderId));
+
+  await log(actor, "update-tracking", "order", String(orderId), `${courierName}: ${trackingNumber}`);
+  revalidatePath("/admin/orders");
+}
+
 /* ----------------------------------------------------------------- settings */
 
 export async function saveSettings(form: FormData) {

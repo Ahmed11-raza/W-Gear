@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { desc } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { formatPrice } from "@/lib/brand";
@@ -19,11 +20,13 @@ export default async function OrdersPage() {
       {rows.length === 0 ? (
         <Empty message="No orders recorded yet. Orders placed at checkout appear here." />
       ) : (
-        <Table head={["Reference", "Customer", "Items", "Payment", "Total", "Status"]}>
+        <Table head={["Reference", "Customer", "Items", "Payment", "Total", "Status", ""]}>
           {rows.map((o) => (
             <tr key={o.id} className="border-b border-white/5 align-top last:border-0">
               <td className="px-4 py-3">
-                <span className="font-mono text-[0.8125rem]">{o.reference}</span>
+                <Link href={`/admin/orders/${o.id}`} className="font-mono text-[0.8125rem] text-white hover:underline">
+                  {o.reference}
+                </Link>
                 <span className="block text-[0.75rem] text-white/40">
                   {o.createdAt.toLocaleString("en-GB")}
                 </span>
@@ -58,6 +61,14 @@ export default async function OrdersPage() {
                   options={STATUSES}
                   action={setOrderStatus}
                 />
+              </td>
+              <td className="px-4 py-3 text-right">
+                <Link
+                  href={`/admin/orders/${o.id}`}
+                  className="text-[0.75rem] text-[#C4F319] hover:underline"
+                >
+                  View &rarr;
+                </Link>
               </td>
             </tr>
           ))}

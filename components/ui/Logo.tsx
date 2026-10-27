@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import { BRAND } from "@/lib/brand";
 import { cn } from "@/lib/cn";
 

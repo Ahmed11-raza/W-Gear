@@ -10,7 +10,7 @@ export const SPORTS: Sport[] = [
   { id: "football", name: "Football", note: "Ninety minutes of sprint and recovery." },
   { id: "basketball", name: "Basketball", note: "Indoor heat, constant vertical movement." },
   { id: "volleyball", name: "Volleyball", note: "Dives, court friction, shoulder range." },
-  { id: "training", name: "Training", note: "Session wear that survives repeat washing." },
+  { id: "training", name: "Workout & Training", note: "High-intensity gym conditioning, compression sets, and squad session wear." },
   { id: "other", name: "Something else", note: "Tell us the sport and we will spec it." },
 ];
 

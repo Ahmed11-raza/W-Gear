@@ -269,3 +269,36 @@ img, svg, video {
 body {
   padding-block-end: var(--demo-bar);
 }
+
+/* ==========================================================================
+   MARQUEE ANIMATION
+   Smooth continuous ticker ticker for site announcements and policy ribbons.
+   ========================================================================== */
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -49,7 +49,11 @@ export const products = sqliteTable(
     line: text("line").$type<ProductLine>().notNull(),
     silhouette: text("silhouette").$type<Silhouette>().notNull(),
     price: integer("price").notNull(),
+    compareAtPrice: integer("compare_at_price"),
     currency: text("currency").notNull().default("PKR"),
+    category: text("category"),
+    campaignName: text("campaign_name"),
+    salePercent: integer("sale_percent"),
     summary: text("summary").notNull(),
     /** Paragraphs. */
     description: text("description", { mode: "json" }).$type<string[]>().notNull(),
@@ -65,6 +69,7 @@ export const products = sqliteTable(
     featured: integer("featured", { mode: "boolean" }).notNull().default(false),
     /** Optional override for the product photograph. */
     imagePath: text("image_path"),
+    images: text("images", { mode: "json" }).$type<string[]>(),
     status: text("status").$type<PublishStatus>().notNull().default("draft"),
     sortOrder: integer("sort_order").notNull().default(0),
     ...timestamps,
@@ -155,6 +160,8 @@ export const orders = sqliteTable(
       .$type<(CartLine & { name: string; unitPrice: number })[]>()
       .notNull(),
     status: text("status").$type<OrderStatus>().notNull().default("pending"),
+    trackingNumber: text("tracking_number"),
+    courierName: text("courier_name").default("TCS Express"),
     notes: text("notes"),
     ...timestamps,
   },

@@ -97,11 +97,20 @@ export function Footer() {
             &copy; {year}{" "}
             {isConfigured(BRAND.legalName) ? BRAND.legalName : BRAND.name}
           </p>
-          <p className="text-spec text-muted">
-            {isConfigured(BRAND.contact.email)
-              ? BRAND.contact.email
-              : "Contact details to be confirmed"}
-          </p>
+          <div className="flex items-center gap-4 text-spec text-muted">
+            <Link
+              href="/admin"
+              className="hover:text-ink hover:underline underline-offset-2 transition-colors"
+            >
+              Admin Control Center &rarr;
+            </Link>
+            <span>&bull;</span>
+            <p>
+              {isConfigured(BRAND.contact.email)
+                ? BRAND.contact.email
+                : "Contact details to be confirmed"}
+            </p>
+          </div>
         </div>
 
         <p className="text-spec mt-6 max-w-[70ch] text-muted">

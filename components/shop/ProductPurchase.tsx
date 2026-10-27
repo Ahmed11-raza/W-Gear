@@ -88,7 +88,18 @@ export function ProductPurchase({ product }: { product: Product }) {
             {product.name}
           </h1>
 
-          <p className="mt-3 text-[1.5rem] font-black text-ink">{formatPrice(product.price)}</p>
+          <div className="mt-3 flex items-baseline gap-3 flex-wrap">
+            <span className="text-[1.75rem] font-black text-ink">{formatPrice(product.price)}</span>
+            {product.compareAtPrice && product.compareAtPrice > product.price && (
+              <>
+                <s className="text-muted text-[1.125rem]">{formatPrice(product.compareAtPrice)}</s>
+                <span className="bg-[#C4F319] text-black text-xs font-black px-2 py-0.5 tracking-wider uppercase">
+                  Save {Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)}%
+                  {product.campaignName ? ` · ${product.campaignName}` : ""}
+                </span>
+              </>
+            )}
+          </div>
           <p className="mt-3 max-w-[46ch] text-muted leading-relaxed text-sm">{product.summary}</p>
 
           {/* Model Fit Bar */}

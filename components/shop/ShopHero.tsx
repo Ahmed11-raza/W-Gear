@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Truck, Sparkles, Award } from "lucide-react";
 
@@ -22,19 +22,19 @@ export function ShopHero() {
       <div className="relative z-10 gutter py-16 sm:py-24 lg:py-28 max-w-6xl">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface/20 border border-line-strong backdrop-blur-md mb-4">
-            <Award className="w-3.5 h-3.5 text-accent-text" />
-            <span className="text-[0.6875rem] font-mono tracking-widest uppercase text-accent-text font-bold">
-              SIALKOT ATELIER &bull; DROP 01 / CORE PRECISION
+            <Award className="w-3.5 h-3.5 text-muted-soft" />
+            <span className="text-[0.6875rem] font-mono tracking-widest uppercase text-inverse/70 font-semibold">
+              WINTER ATELIER &bull; SIALKOT PRECISION APPAREL
             </span>
           </div>
 
           <h1 className="font-display font-black text-[2.5rem] sm:text-[3.75rem] lg:text-[4.25rem] tracking-[-0.03em] uppercase leading-[0.95] text-inverse">
-            One Cloth. <br />
-            <span className="text-muted-soft">Every Movement.</span>
+            Cold Weather. <br />
+            <span className="text-muted-soft">Relentless Motion.</span>
           </h1>
 
-          <p className="mt-5 text-inverse/80 text-[0.9375rem] sm:text-[1.0625rem] leading-relaxed max-w-[50ch]">
-            Twelve high-performance pieces cut from custom circular-knit technical yarn. Engineered for Pakistan&apos;s heat, finished for daily distinction, and delivered with open-box inspection.
+          <p className="mt-5 text-inverse/80 text-[0.9375rem] sm:text-[1.0625rem] leading-relaxed max-w-[52ch]">
+            Engineered for Pakistan&apos;s winter season. Dense 380 GSM brushed fleece, thermo-regulating micro-grid knits, and wind-blocking training pants cut with flatlock anti-chafing seams. Delivered nationwide with doorstep inspection.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -42,7 +42,7 @@ export function ShopHero() {
               href="#catalog"
               className="inline-flex items-center gap-2 bg-inverse text-ink hover:bg-surface hover:text-inverse text-xs font-bold uppercase tracking-widest px-7 py-4 transition-colors duration-200"
             >
-              <span>Explore Collection</span>
+              <span>Explore Winter Drop</span>
               <ArrowRight className="w-4 h-4" />
             </a>
 
@@ -50,7 +50,7 @@ export function ShopHero() {
               href="/teamwear/build"
               className="inline-flex items-center gap-2 border border-line-strong bg-surface/30 backdrop-blur-md text-inverse hover:bg-surface text-xs font-bold uppercase tracking-widest px-6 py-4 transition-colors duration-200"
             >
-              <span>Custom Teamwear</span>
+              <span>Winter Club Kits</span>
             </Link>
           </div>
         </div>

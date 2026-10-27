@@ -44,12 +44,23 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
 
         {!available && (
-          <p className="text-spec absolute top-3 left-3 bg-ink px-2 py-0.5 text-inverse text-[0.6875rem] font-bold uppercase">
+          <p className="text-spec absolute top-3 left-3 bg-ink px-2 py-0.5 text-inverse text-[0.6875rem] font-bold uppercase z-10">
             Sold out
           </p>
         )}
 
-        <span className="text-spec absolute top-3 right-3 bg-canvas/80 backdrop-blur-xs px-2 py-0.5 text-muted text-[0.625rem] font-bold uppercase tracking-wider">
+        {/* Campaign or Winter Tag */}
+        {product.compareAtPrice && product.compareAtPrice > product.price ? (
+          <span className="text-spec absolute bottom-3 left-3 bg-ink text-white border border-white/20 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-wider shadow-xs z-10">
+            {product.campaignName || "SALE"} &bull; {Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)}% OFF
+          </span>
+        ) : product.silhouette === "hoodie" || product.silhouette === "jacket" || product.silhouette === "joggers" || product.silhouette === "longsleeve" ? (
+          <span className="text-spec absolute bottom-3 left-3 bg-ink/90 text-white border border-white/20 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-wider z-10 backdrop-blur-xs">
+            WINTER CORE &bull; 380 GSM
+          </span>
+        ) : null}
+
+        <span className="text-spec absolute top-3 right-3 bg-canvas/90 backdrop-blur-xs px-2 py-0.5 text-ink text-[0.625rem] font-bold uppercase tracking-wider border border-line z-10">
           {product.line}
         </span>
       </div>
@@ -63,10 +74,33 @@ export function ProductCard({ product }: { product: Product }) {
             {product.name}
           </Link>
         </h3>
-        <p className="text-spec shrink-0 text-ink font-bold text-[0.9375rem]">{formatPrice(product.price)}</p>
+        <div className="text-right shrink-0">
+          <p className="text-spec text-ink font-bold text-[0.9375rem]">{formatPrice(product.price)}</p>
+          {product.compareAtPrice && product.compareAtPrice > product.price && (
+            <s className="text-spec text-muted text-[0.75rem] block">{formatPrice(product.compareAtPrice)}</s>
+          )}
+        </div>
       </div>
 
       <p className="mt-1.5 text-small text-muted line-clamp-2 leading-snug">{product.summary}</p>
+
+      {/* Available Sizes Quick View */}
+      <div className="relative z-10 mt-2.5 flex items-center gap-1 flex-wrap">
+        <span className="text-[0.625rem] font-mono text-muted uppercase tracking-wider mr-1">Sizes:</span>
+        {product.variants.map((v) => (
+          <span
+            key={v.size}
+            className={cn(
+              "px-1.5 py-0.5 text-[0.625rem] font-mono font-bold rounded",
+              v.stock > 0
+                ? "bg-canvas text-ink border border-line"
+                : "text-muted/40 line-through"
+            )}
+          >
+            {v.size}
+          </span>
+        ))}
+      </div>
 
       <div className="relative z-10 mt-3 pt-2 border-t border-line/60 flex items-center justify-between">
         <div className="flex items-center gap-1.5">

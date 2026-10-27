@@ -149,7 +149,13 @@ export interface Product {
   line: ProductLine;
   silhouette: Silhouette;
   price: Price;
+  compareAtPrice?: Price;
   currency: Currency;
+  category?: string;
+  campaignName?: string;
+  salePercent?: number;
+  imagePath?: string;
+  images?: string[];
   /** One line under the name in the grid. */
   summary: string;
   /** Two or three paragraphs on the product page. */

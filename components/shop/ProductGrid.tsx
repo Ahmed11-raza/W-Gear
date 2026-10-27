@@ -53,8 +53,20 @@ export function ProductGrid({ products }: { products: Product[] }) {
 
   return (
     <>
-      {/* Interactive Filter & Sort Toolbar */}
-      <div id="catalog" className="scroll-mt-20"></div>
+      {/* Winter Season Announcement Banner */}
+      <div className="bg-[#101214] border-b border-white/10 py-2.5 px-4 text-center">
+        <div className="gutter flex flex-wrap items-center justify-center gap-3 text-xs font-mono tracking-wider uppercase text-white/80">
+          <span className="inline-flex items-center gap-1.5 font-bold text-white">
+            <Sparkles className="w-3.5 h-3.5 text-white/50" />
+            WINTER &apos;26 ATELIER DROP:
+          </span>
+          <span>Heavyweight 380 GSM Brushed Fleece &bull; Thermal Base-Layers &bull; Windproof Track Pants</span>
+          <span className="hidden md:inline text-white/30">&bull;</span>
+          <span className="hidden md:inline text-white/60">
+            Complimentary Courier Dispatch on Prepaid Orders
+          </span>
+        </div>
+      </div>
 
       {/* Interactive Filter & Sort Toolbar */}
       <div className="sticky top-[68px] md:top-[76px] z-30 bg-canvas/95 backdrop-blur-md border-b border-line py-3.5 shadow-xs">
@@ -87,8 +99,8 @@ export function ProductGrid({ products }: { products: Product[] }) {
               type="text"
               value={quickSearch}
               onChange={(e) => setQuickSearch(e.target.value)}
-              placeholder="Search tee, polo, short..."
-              className="text-xs px-3 py-1.5 bg-surface border border-line focus:outline-none focus:border-ink w-36 sm:w-44"
+              placeholder="Search fleece, jogger, tee..."
+              className="text-xs px-3 py-1.5 bg-surface border border-line focus:outline-none focus:border-ink w-36 sm:w-48"
             />
 
             {/* Sort Selector */}
@@ -113,13 +125,19 @@ export function ProductGrid({ products }: { products: Product[] }) {
 
       {/* Catalog Grid View */}
       <section aria-label="Products" className="gutter py-12">
-        <div className="flex items-baseline justify-between mb-6 pb-2 border-b border-line">
+        <div className="flex flex-wrap items-baseline justify-between gap-2 mb-6 pb-2 border-b border-line">
           <p className="text-spec text-muted">
             Showing <strong className="text-ink">{visible.length}</strong> {visible.length === 1 ? "piece" : "pieces"}
+            {line !== "all" && <span className="ml-1 text-accent-text font-bold">in {line}</span>}
           </p>
-          <p className="text-xs text-muted">
-            Prices in PKR (Inclusive of sales tax)
-          </p>
+          <div className="flex items-center gap-3 text-xs text-muted">
+            <span className="flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-accent-text" />
+              <span>Doorstep Inspection</span>
+            </span>
+            <span>&bull;</span>
+            <span className="text-accent-text font-medium">Easy Cash Back (7 Days)</span>
+          </div>
         </div>
 
         {visible.length === 0 ? (

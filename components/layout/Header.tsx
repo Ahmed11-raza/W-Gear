@@ -42,25 +42,40 @@ export function Header() {
           scrolled ? "bg-canvas/92 backdrop-blur-[6px] border-b border-line shadow-xs" : "bg-transparent",
         )}
       >
-        {/* Easy Cash Back Policy Ribbon */}
-        <div className="bg-[#141210] text-[#f9f8f6] border-b border-white/10 py-1.5 px-4 transition-colors">
-          <div className="gutter flex items-center justify-center sm:justify-between text-[0.6875rem] font-mono tracking-wider uppercase">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C4F319] animate-pulse shrink-0" />
-              <span className="font-bold text-[#C4F319]">Easy Cash Back Policy:</span>
-              <span className="text-[#f9f8f6]/90 hidden md:inline">
-                7-Day 100% Money-Back Guarantee &bull; Doorstep Inspection Allowed &bull; Instant Raast / Bank Refunds
-              </span>
-              <span className="text-[#f9f8f6]/90 md:hidden">
-                7-Day Money-Back &bull; Doorstep Inspection
-              </span>
-            </div>
-            <Link
-              href="/shipping"
-              className="hidden sm:inline-flex items-center gap-1 text-[0.625rem] text-[#f9f8f6]/70 hover:text-[#C4F319] underline underline-offset-2 transition-colors font-sans"
-            >
-              Policy Details &rarr;
-            </Link>
+        {/* Easy Cash Back Policy & Value Announcement Moving Ribbon */}
+        <div className="bg-[#101214] text-[#f9f8f6] border-b border-white/10 py-1.5 overflow-hidden select-none transition-colors group">
+          <div className="animate-marquee flex items-center text-[0.6875rem] font-mono tracking-wider uppercase">
+            {[0, 1].map((copyIndex) => (
+              <div
+                key={copyIndex}
+                aria-hidden={copyIndex === 1}
+                className="flex items-center gap-6 shrink-0 pr-6"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/60 shrink-0" />
+                  <span className="font-semibold text-white">Complimentary Priority Dispatch on Prepaid Orders (Raast &amp; Card)</span>
+                </span>
+                <span className="text-white/30">&bull;</span>
+                <span className="flex items-center gap-1.5 text-white/90">
+                  <span className="font-semibold text-white">7-Day Cash Back Guarantee:</span>
+                  <span>Doorstep Inspection Allowed Before COD</span>
+                </span>
+                <span className="text-white/30">&bull;</span>
+                <span className="flex items-center gap-1.5 text-white/90">
+                  <span className="font-semibold text-white">Instant Raast Refunds:</span>
+                  <span>Direct to Your Account</span>
+                </span>
+                <span className="text-white/30">&bull;</span>
+                <span className="text-white/70">W-GEAR // SIALKOT ATELIER &bull; DROP 02</span>
+                <span className="text-white/30">&bull;</span>
+                <Link
+                  href="/shipping"
+                  className="inline-flex items-center gap-1 text-[0.625rem] text-white/70 hover:text-white underline underline-offset-2"
+                >
+                  Policy Details &rarr;
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
 
